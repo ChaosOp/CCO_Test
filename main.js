@@ -1,9 +1,9 @@
 const width_list = [28, 44, 28];
 
 const default_pos = {
-    "#refresh_inv": [1080, 10],
-    "#refresh_map": [5, 65],
-    "#refresh_chat": [1570, 70]
+    "#refresh_inv": [20, 55],
+    "#refresh_map": [1080, 10],
+    "#refresh_chat": [1590, 65]
 };
 
 const text_list = {
