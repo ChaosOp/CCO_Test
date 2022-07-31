@@ -1,9 +1,9 @@
-const width_list = [28, 44, 28];
+const width_list = [27, 30, 27];
 
 const default_pos = {
-    "#refresh_inv": [20, 55],
-    "#refresh_map": [1080, 10],
-    "#refresh_chat": [1590, 65]
+    "#refresh_inv": [550, 10],
+    "#refresh_map": [1255, 5],
+    "#refresh_chat": [1600, 60]
 };
 
 const text_list = {
@@ -34,6 +34,7 @@ const lang = localStorage.lang ?? "zh";
         src: `https://cybercodeonline.com/tabs/${route}`,
         style: {
             "width": `${width_list[i]}%`,
+            "margin": `0px ${i == 1 ? "8%" : ""}`
         }
     });
 
