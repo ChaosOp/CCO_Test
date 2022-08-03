@@ -2,7 +2,7 @@ a {
     position: fixed;
     top: 8%;
     right: 48%;
-    width: fit-content;
+    width: max-content;
     height: 50px;
     text-align: center;
     line-height: 50px;
