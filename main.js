@@ -57,7 +57,7 @@ function init_drag(selector) {
     let [startEvt, moveEvt, endEvt] = eventList;
 
 
-    if (localStorage.tempPos !== undefined) setElementPos(selector, ...(JSON.parse(localStorage.tempPos)?.[selector] ?? [0, 0]));
+    setElementPos(selector, ...(JSON.parse(localStorage.tempPos ? localStorage.tempPos : "{}")?.[selector] ?? [0, 0]));
 
     dragElement.style.cursor = 'move';
     dragElement.initedDrag = true;
@@ -97,7 +97,7 @@ function init_drag(selector) {
 
     function setElementPos(selector, left = 0, top = 0) {
         let element = window.get(selector)[0];
-        let pos = JSON.parse(localStorage.tempPos ?? "{}");
+        let pos = JSON.parse(localStorage.tempPos ? localStorage.tempPos : "{}");
 
         if (left || top) {
             pos[selector] = [left, top];

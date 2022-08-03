@@ -1,0 +1,615 @@
+/* ==UserStyle==
+@name         CCO Soft Theme 
+@version      20220718.09.02
+@namespace    userstyles.world/user/liansheng197
+@description  ...
+@author       liansheng197
+@license      MIT
+==/UserStyle== */
+
+
+/**************************************
+*            全局：底部按鈕              *
+**************************************/
+ion-tabs {
+    position: relative !important;
+}
+
+ion-tab-bar {
+    position: relative;
+}
+
+ion-tab-button {
+    background-color: var(--primary-darker);
+}
+
+ion-tab-button.tab-selected {
+    color: #ff0;
+}
+
+ion-tab-button span.relative:has(svg) {
+    position: absolute;
+    display: flex;
+    background-color: var(--primary-darker);
+    height: 120px;
+    transition: 0.25s;
+    z-index: 1;
+}
+
+ion-tab-button span.relative:has(svg):hover {
+    transform: translateY(-20%);
+    opacity: 0;
+}
+
+ion-tab-button span.relative svg {
+    margin: auto;
+    width: 100%;
+    height: 40px;
+}
+
+ion-tab-button ion-label {
+    position: fixed;
+    line-height: 1.25rem !important;
+    font-size: 1.2rem !important;
+}
+
+ion-tab-button.tab-selected ion-label {
+    color: yellow;
+}
+
+
+
+/**************************************
+*        全局：所有掛機行動的按鈕         *
+**************************************/
+span>div.ion-activatable {
+    position: relative;
+}
+
+span>div.ion-activatable>div.w-full {
+    position: relative;
+    padding: 4px;
+}
+
+span>div.ion-activatable>div.w-full span.uppercase {
+    background-color: var(--primary-darker);
+    height: 60px;
+    border-radius: 4px;
+    padding: 8px;
+    opacity: 1;
+    z-index: 1;
+    transition: 0.25s;
+}
+
+span>div.ion-activatable>div.w-full span.uppercase:hover {
+    opacity: 0;
+    transition: 0.25s;
+}
+
+span>div.ion-activatable>div.w-full span.whitespace-pre-line {
+    position: absolute;
+    top: 0.4rem;
+    padding-right: 8px;
+    transition: 0.25s;
+    font-size: 0.75rem;
+}
+
+span>div.ion-activatable>div.w-full span.text-primary-dark:has(.normal-case) {
+    display: none;
+}
+
+span>div.ion-activatable>div.w-full span:has(svg) {
+    z-index: 2;
+}
+
+span>div.ion-activatable>div.w-full span:has(.text-danger) {
+    z-index: 2;
+}
+
+
+
+/**************************************
+*        全局：右下角的手機按鈕           *
+**************************************/
+.fab-container:has(.pointer-events-none) div.fixed.fab {
+    opacity: 0.5;
+    transition: 0.25s;
+}
+
+.fab-container:has(.pointer-events-none) div.fixed.fab:hover {
+    opacity: 1;
+    transition: 0.25s;
+}
+
+
+
+/**************************************
+*        全局：所有旅行相關的按鈕         *
+**************************************/
+span.flex-grow>div.w-full {
+    position: relative;
+}
+
+span.flex-grow>div.w-full {
+    position: relative;
+    padding: 4px;
+}
+
+span.flex-grow>div.w-full span.uppercase {
+    background-color: var(--primary-darker);
+    height: 45px;
+    padding-top: 10px;
+    border-radius: 4px;
+    opacity: 1;
+    z-index: 1;
+    transition: 0.25s;
+}
+
+span.flex-grow>div.w-full span.uppercase:hover {
+    opacity: 0;
+    transition: 0.25s;
+}
+
+span.flex-grow>div.w-full span.text-primary-dark {
+    position: absolute;
+    display: block;
+    padding-right: 5rem;
+    font-weight: bold;
+}
+
+span.flex-grow>div.w-full:has(path[d^='M403.594 220.649a7.55']) span.text-primary-dark {
+    color: yellow;
+    top: 1rem;
+    font-size: 1rem;
+}
+
+span.flex-grow>div.w-full:has(path[d^='M43 1.91c-1.92']) span.text-primary-dark {
+    color: yellow;
+    top: 1rem;
+    font-size: 1rem;
+}
+
+
+span.flex-grow>div.w-full svg {
+    margin-left: 16px;
+}
+
+span.flex-grow>div.w-full span.text-danger {
+    z-index: 1;
+}
+
+
+
+/**************************************
+ *             全局：分段元素            *
+ **************************************/
+/*:not(.flex-row) > div[class='flex-1']:empty {
+		display: none;
+	}*/
+
+
+
+/**************************************
+*        分頁：背包頁的頂部按鈕          *
+**************************************/
+/*
+ - 部分頁面有分隔條的原因，改用 nth-last-child 來決定圖示
+ - 五個分頁的讀取順序不固定，不能用 nth* 來判斷，改用右下角是否存在手機按鈕來決定
+*/
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1) {
+    position: relative !important;
+    height: 50px;
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase {
+    position: relative !important;
+    height: 100%;
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1) {
+    color: #0000;
+    width: 100%;
+    height: 100%;
+    padding-top: calc(25px - 0.5rem);
+    text-shadow: none;
+    text-align: center;
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(2) {
+    height: 16px;
+    width: 24px;
+    padding: 0;
+    text-align: center;
+    position: absolute;
+    top: calc(25% - 8px);
+    left: calc(60% - 12px);
+    text-shadow: none;
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1):hover {
+    color: #fff;
+    text-shadow: none;
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1)::before {
+    content: "";
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-darker) invert(1);
+    background-size: 32px 32px;
+    filter: invert(1);
+    transition: 0.25s;
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1):hover::before {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(4)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/26159/shield.svg");
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(3)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/29190/backpack.svg");
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(2)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/98789/mailbox.svg");
+}
+
+#root:not(:has(div.fixed.fab)) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(1)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/65383/saw.svg");
+}
+
+
+
+/**************************************
+ *       分頁：聊天室的頂部按鈕           *
+ **************************************/
+ion-header {
+    position: relative !important;
+    height: 50px !important;
+}
+
+ion-header>.uppercase {
+    position: relative !important;
+    height: 100%;
+}
+
+ion-header>.uppercase>span:nth-child(1) {
+    color: #0000;
+    width: 100%;
+    height: 100%;
+    padding-top: calc(25px - 0.5rem);
+    text-shadow: none;
+    text-align: center;
+}
+
+ion-header>.uppercase>span:nth-child(2) {
+    height: 16px;
+    width: 24px;
+    padding: 0;
+    text-align: center;
+    position: absolute;
+    top: calc(25% - 8px);
+    left: calc(60% - 12px);
+    text-shadow: none;
+}
+
+ion-header>.uppercase>span:nth-child(1):hover {
+    color: #fff;
+    text-shadow: none;
+}
+
+ion-header>.uppercase>span:nth-child(1)::before {
+    content: "";
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-darker) invert(1);
+    background-size: 32px 32px;
+    filter: invert(1);
+    transition: 0.25s;
+}
+
+ion-header>.uppercase>span:nth-child(1):hover::before {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+ion-header> :nth-child(1)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/332404/global.svg") !important;
+}
+
+ion-header> :nth-child(2)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/335242/people.svg") !important;
+}
+
+ion-header> :nth-child(3)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/113460/mail-sent.svg") !important;
+}
+
+ion-header> :nth-child(4)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/340729/notification.svg") !important;
+}
+
+
+
+/**************************************
+*        分頁：個人檔案頁的頂部按鈕       *
+**************************************/
+/*
+ - 部分頁面有分隔條的原因，改用 nth-last-child 來決定圖示
+ - 五個分頁的讀取順序不固定，不能用 nth* 來判斷，改用右下角是否存在手機按鈕來決定
+*/
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1) {
+    position: relative !important;
+    height: 50px;
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase {
+    position: relative !important;
+    height: 100%;
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1) {
+    color: #0000;
+    width: 100%;
+    height: 100%;
+    padding-top: calc(25px - 0.5rem);
+    text-shadow: none;
+    text-align: center;
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(2) {
+    height: 16px;
+    width: 24px;
+    padding: 0;
+    text-align: center;
+    position: absolute;
+    top: calc(25% - 8px);
+    left: calc(60% - 12px);
+    text-shadow: none;
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1):hover {
+    color: #fff;
+    text-shadow: none;
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1)::before {
+    content: "";
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-darker) invert(1);
+    background-size: 32px 32px;
+    filter: invert(1);
+    transition: 0.25s;
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)>.uppercase>span:nth-child(1):hover::before {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(4)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/220870/profile.svg");
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(3)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/274199/update.svg");
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(2)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/320250/help.svg");
+}
+
+#root:has(div.fixed.fab) .ion-page:not(.ion-page-hidden)> :nth-child(1)> :nth-last-child(1)>span:nth-child(1)::before {
+    background-image: url("https://www.svgrepo.com/show/24773/group.svg");
+}
+
+
+
+/**************************************
+ *           分頁：聊天訊息             *
+ **************************************/
+/* 通用聊天 上方玩家 去除原生的額外邊框 */
+.chat-message .message-container::after {
+    opacity: 0;
+}
+
+/* 通用聊天 上方玩家資訊 */
+.chat-message .header {
+    border-radius: 8px 8px 0 0 !important;
+    padding: 0 10px !important;
+    margin: 0 !important;
+}
+
+/* 通用聊天 上方玩家 去除原生的折角 */
+.chat-message .header::after {
+    opacity: 0;
+}
+
+/* 通用聊天 上方玩家資訊 會員等級 */
+.chat-message span.title {
+    margin: 0 16px;
+    font-size: 0.8rem !important;
+}
+
+.chat-message span.title:not(:empty)::before {
+    content: "【";
+}
+
+.chat-message span.title:not(:empty)::after {
+    content: "】";
+}
+
+/* 通用聊天 中間訊息框 */
+.chat-message .message-container {
+    border-radius: 0 16px 16px 16px;
+    border-width: 1px !important;
+}
+
+.chat-message .message-container::after {
+    width: 0;
+}
+
+/* 通用聊天 下方等級與時間 */
+.chat-message span:not([class]) {
+    margin: 0 16px;
+}
+
+/* 我方聊天 訊息框 */
+.chat-message.isMe .message-container {
+    border-radius: 16px 0 16px 16px;
+}
+
+/* 你正在看舊訊息 */
+ion-content div.absolute div.slide-in-up {
+    background-color: #fffa;
+    color: #000;
+    font-size: 1.05rem;
+    padding: 2px 16px;
+    height: 100%;
+}
+
+
+/* 標記他人 調亮基本底色 不含地城連結 */
+span[class*='hover:bg-black-normal'] {
+    background-color: #353c3c;
+    opacity: 0.8;
+    margin: 0 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+span[class*='hover:bg-black-normal']:hover {
+    background-color: #353c3c;
+    opacity: 1;
+}
+
+
+
+/**************************************
+ *         區塊：個人檔案 STATS         *
+ **************************************/
+div.z-10:has(.items-start):has(.text-xs)>div.mb-2 {
+    position: relative;
+    padding: 0;
+    border-radius: 8px;
+}
+
+div.z-10:has(.items-start):has(.text-xs)>div.mb-2>.text-xs {
+    position: absolute;
+    top: calc(50% - 0.5rem);
+    transition: 0.25s;
+    margin: auto 8px;
+    font-size: 0.9rem;
+}
+
+div.z-10:has(.items-start):has(.text-xs)>div.mb-2>.items-start {
+    padding: 8px;
+    background-color: var(--primary-darker);
+    border-radius: 8px;
+    opacity: 1;
+    z-index: 1;
+    transition: 0.25s;
+}
+
+div.z-10:has(.items-start):has(.text-xs)>div.mb-2>.items-start:hover {
+    opacity: 0;
+    transition: 0.25s;
+}
+
+
+
+/**************************************
+ *         區塊：個人檔案 GANG          *
+ **************************************/
+div.w-full>.detail-row {
+    position: relative;
+    display: block !important;
+    height: fit-content !important;
+    border-radius: 8px;
+    padding: 8px !important;
+}
+
+div.w-full>.detail-row>label {
+    display: inline-block !important;
+    width: calc(40% + 8px);
+    font-size: 1rem !important;
+    color: var(--ion-color-primary) !important;
+}
+
+div.w-full>.detail-row>label:after {
+    content: ":";
+    position: absolute;
+    left: 39%;
+}
+
+div.w-full>.detail-row>span {
+    display: inline-block !important;
+    width: 55%;
+}
+
+div.w-full>.detail-row:nth-last-child(4)>span {
+    text-transform: none;
+}
+
+
+
+/**************************************
+ *       區塊：附近的敵人與地下城按鈕      *
+ **************************************/
+/*
+ 由於版面使用 flex-direction = column 排版，所以地下城的按鈕只能用硬刻的方式
+*/
+ion-content span:has(path[d^='M116 166a10']) {
+    width: 47%;
+}
+
+ion-content span:has(path[d^='M176 416v64M80']) {
+    position: absolute;
+    top: 115px;
+    left: 50%;
+    width: 47%;
+    z-index: 1;
+}
+
+ion-content span:has(path[d^='M116 166a10']) span.text-primary-dark {
+    display: none;
+}
+
+ion-content span:has(path[d^='M176 416v64M80']) span.text-primary-dark {
+    display: none;
+}
+
+@media only screen and (min-width: 900px) {
+    ion-content div.flex-1:has(path[d^='M116 166a10']) {
+        max-width: 500px;
+    }
+
+    ion-content span:has(path[d^='M116 166a10']) {
+        width: 230px;
+    }
+
+    ion-content span:has(path[d^='M176 416v64M80']) {
+        position: absolute;
+        top: 115px;
+        left: calc(50% - 3px);
+        width: 230px;
+        z-index: 1;
+    }
+}
