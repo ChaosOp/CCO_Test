@@ -6,26 +6,13 @@ const default_pos = {
     "#refresh_chat": [1600, 60]
 };
 
-const text_list = {
-    "refresh": {
-        "zh": "重整",
-        "en": "Refresh"
-    },
-    "inv": {
-        "zh": "背包",
-        "en": "Inv."
-    },
-    "map": {
-        "zh": "主畫面",
-        "en": "Main"
-    },
-    "chat": {
-        "zh": "聊天室",
-        "en": "Chat"
-    }
+const svg_list = {
+    "refresh": "https://www.svgrepo.com/show/54751/refresh.svg",
+    "inv": "https://www.svgrepo.com/show/55207/left-arrow.svg",
+    "map": "https://www.svgrepo.com/show/43345/dot.svg",
+    "chat": "https://www.svgrepo.com/show/58877/right-straight-arrow.svg"
 };
 
-const lang = localStorage.lang ?? "zh";
 
 ["inv", "map", "chat"].forEach((route, i) => {
     let frame = window.new_node("iframe", {
@@ -118,10 +105,21 @@ function init_drag(selector) {
 function add_refresh(id, window_ref) {
 
 
-    let refresh = window.new_node("a", {
-        id: `refresh_${id}`,
-        innerText: ` ${text_list.refresh[lang]} ${text_list[id][lang]} `
+    const refresh = window.new_node("a", {
+        id: `refresh_${id}`
     });
+
+    const svg = ["refresh", id].map((key, i) => {
+        return window.new_node("img", {
+            src: svg_list[key],
+            style: {
+                "top": `${5 + 33 * i}px`,
+                "left": "21px",
+            }
+        });
+    });
+
+    svg.forEach((img) => refresh.appendChild(img));
 
     refresh.addEventListener("mouseup", () => {
         if (refresh.drag) return;
