@@ -94,8 +94,9 @@ function init_drag(selector) {
             pos[selector] = default_pos[selector];
         }
 
-        element.style.left = `${pos[selector][0]}px`;
-        element.style.top = `${pos[selector][1]}px`;
+
+        element.style.left = `${pos[selector][0] / window.innerWidth * 100}%`;
+        element.style.top = `${pos[selector][1] / window.innerHeight * 100}%`;
 
 
         localStorage.tempPos = JSON.stringify(pos);
