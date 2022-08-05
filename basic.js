@@ -16,12 +16,12 @@ window.get = (selector, ref = document) => {
  * @param {object} properties
  * @returns {HTMLElement}
  */
-window.new_node = (tagname, properties = {}) => {
-    let property_modifier = (obj, properties) => {
+window.newNode = (tagname, properties = {}) => {
+    let propertyModifier = (obj, properties) => {
         for (let key of Object.keys(properties)) {
             (
                 (typeof (obj[key]) === 'object') ?
-                    (property_modifier(obj[key], properties[key]))
+                    (propertyModifier(obj[key], properties[key]))
                     :
                     (obj[key] = properties[key])
             );
@@ -29,5 +29,5 @@ window.new_node = (tagname, properties = {}) => {
 
         return obj;
     };
-    return property_modifier(document.createElement(tagname), properties);
+    return propertyModifier(document.createElement(tagname), properties);
 }

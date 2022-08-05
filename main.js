@@ -1,37 +1,39 @@
-const width_list = [27, 30, 27];
+const widthList = [27, 30, 27];
 
-const default_pos = {
-    "#refresh_inv": [550, 10],
-    "#refresh_map": [1255, 5],
-    "#refresh_chat": [1600, 60]
+const defaultPos = {
+    "#refreshInv": [550, 10],
+    "#refreshMap": [1255, 5],
+    "#refreshChat": [1600, 60]
 };
 
-const svg_list = {
+const svgList = {
     "refresh": "https://www.svgrepo.com/show/54751/refresh.svg",
-    "inv": "https://www.svgrepo.com/show/55207/left-arrow.svg",
-    "map": "https://www.svgrepo.com/show/43345/dot.svg",
-    "chat": "https://www.svgrepo.com/show/58877/right-straight-arrow.svg"
+    "Inv": "https://www.svgrepo.com/show/55207/left-arrow.svg",
+    "Map": "https://www.svgrepo.com/show/43345/dot.svg",
+    "Chat": "https://www.svgrepo.com/show/58877/right-straight-arrow.svg"
 };
 
 
-["inv", "map", "chat"].forEach((route, i) => {
-    let frame = window.new_node("iframe", {
-        id: `${route}_window`,
+["Inv", "Map", "Chat"].forEach((route, i) => {
+    let frame = window.newNode("iframe", {
+        id: `${route}Window`,
         frameBorder: "0",
         src: `https://cybercodeonline.com/tabs/${route}`,
         style: {
-            "width": `${width_list[i]}%`,
+            "width": `${widthList[i]}%`,
             "margin": `0px ${i == 1 ? "8%" : ""}`
         }
     });
 
     window.get("#wrap")[0].appendChild(frame);
 
-    add_refresh(route, frame);
+    addRefresh(route, frame);
 });
 
-
-function init_drag(selector) {
+/**
+ * @param {String} selector selector of the element to be inited
+ */
+function initDrag(selector) {
 
     let dragElement = window.get(selector)[0];
     if (dragElement.initedDrag) return;
@@ -77,10 +79,21 @@ function init_drag(selector) {
         dragElement.addEventListener(endEvt, endHandler);
     });
 
+
+    /**
+     * @param {Event} event the event includes [x, y]
+     * @returns {Array} [X, Y]
+     */
     function getEventPos(event) {
         return ["clientX", "clientY"].map((type) => event.touches?.[0][type] ?? event[type]);
     }
 
+
+    /**
+     * @param {String} selector selector of the element to be selected
+     * @param {Number} left absolute pos offset from left
+     * @param {Number} top absolute pos offset from top
+     */
     function setElementPos(selector, left = 0, top = 0) {
         let element = window.get(selector)[0];
         let pos = JSON.parse(localStorage.tempPos ? localStorage.tempPos : "{}");
@@ -90,7 +103,7 @@ function init_drag(selector) {
         }
 
         if (!pos[selector]) {
-            pos[selector] = default_pos[selector];
+            pos[selector] = defaultPos[selector];
         }
 
         const getPercentBorder = (val, total, max, min = 0) => Math.min(Math.max(val, min), max) / total * 100
@@ -105,16 +118,21 @@ function init_drag(selector) {
     }
 }
 
-function add_refresh(id, window_ref) {
+
+/**
+ * @param {String} id id of IFrame
+ * @param {HTMLIFrameElement} windowRef selected IFrame 
+ */
+function addRefresh(id, windowRef) {
 
 
-    const refresh = window.new_node("a", {
-        id: `refresh_${id}`
+    const refresh = window.newNode("a", {
+        id: `refresh${id}`
     });
 
     const svg = ["refresh", id].map((key, i) => {
-        return window.new_node("img", {
-            src: svg_list[key],
+        return window.newNode("img", {
+            src: svgList[key],
             style: {
                 "top": `${5 + 33 * i}px`,
                 "left": "21px",
@@ -126,12 +144,12 @@ function add_refresh(id, window_ref) {
 
     refresh.addEventListener("mouseup", () => {
         if (refresh.drag) return;
-        window_ref.src = window_ref.src;
+        windowRef.src = windowRef.src;
     });
 
 
     setTimeout(() => {
         window.get("body")[0].appendChild(refresh);
-        init_drag(`#refresh_${id}`);
+        initDrag(`#refresh${id}`);
     }, 2000);
 }
