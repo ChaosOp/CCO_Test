@@ -63,8 +63,7 @@ function init_drag(selector) {
 
             dragElement.drag = true;
 
-            const border = document.documentElement.clientWidth - dragElement.offsetWidth;
-            let pos = getEventPos(event).map((pos, i) => Math.min(Math.max(pos - distance[i], 0), border));
+            let pos = getEventPos(event).map((pos, i) => pos - distance[i]);
 
             setElementPos(selector, ...pos);
         }
@@ -94,10 +93,13 @@ function init_drag(selector) {
             pos[selector] = default_pos[selector];
         }
 
+        const getPercentBorder = (val, total, max, min = 0) => Math.min(Math.max(val, min), max) / total * 100
 
-        element.style.left = `${pos[selector][0] / window.innerWidth * 100}%`;
-        element.style.top = `${pos[selector][1] / window.innerHeight * 100}%`;
+        const widthLimit = window.innerWidth - dragElement.offsetWidth;
+        const heightLimit = window.innerHeight - dragElement.offsetHeight;
 
+        element.style.left = `${getPercentBorder(pos[selector][0], window.innerWidth, widthLimit)}%`;
+        element.style.top = `${getPercentBorder(pos[selector][1], window.innerHeight, heightLimit)}%`;
 
         localStorage.tempPos = JSON.stringify(pos);
     }
