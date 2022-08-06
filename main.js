@@ -6,11 +6,10 @@ const defaultPos = {
     "#refreshChat": [1600, 60]
 };
 
-const svgList = {
-    "refresh": "https://www.svgrepo.com/show/54751/refresh.svg",
-    "Inv": "https://www.svgrepo.com/show/55207/left-arrow.svg",
-    "Map": "https://www.svgrepo.com/show/43345/dot.svg",
-    "Chat": "https://www.svgrepo.com/show/58877/right-straight-arrow.svg"
+const iconList = {
+    "Inv": "https://i.imgur.com/WJA22Rn.png",
+    "Map": "https://i.imgur.com/k8KdSVE.png",
+    "Chat": "https://i.imgur.com/VvRco9j.png"
 };
 
 
@@ -130,17 +129,10 @@ function addRefresh(id, windowRef) {
         id: `refresh${id}`
     });
 
-    const svg = ["refresh", id].map((key, i) => {
-        return window.newNode("img", {
-            src: svgList[key],
-            style: {
-                "top": `${5 + 33 * i}px`,
-                "left": "21px",
-            }
-        });
+    const icon = window.newNode("img", {
+        src: iconList[id]
     });
-
-    svg.forEach((img) => refresh.appendChild(img));
+    refresh.appendChild(icon);
 
     refresh.addEventListener("mouseup", () => {
         if (refresh.drag) return;
