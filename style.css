@@ -10,6 +10,7 @@ a {
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     border: 1px solid #C0E4DC;
+    transition: background-color 0.5s;
 }
 
 body {
