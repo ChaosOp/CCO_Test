@@ -14,7 +14,8 @@ const scale = mapArrToObj(
     definedIdList
 );
 
-const widthList = [29, 100, (56 - (windowWidth / scale.chat))];
+//const widthList = [29, 100, (56 - (windowWidth / scale.chat))];
+const widthList = [27, 30, 27];
 
 const defaultPos = mapArrToObj(
     [10, 5, 60, 5, 5],
@@ -44,7 +45,7 @@ const iconList = {
 
 
     ["Inv", "Map", "Chat"].forEach((route, i) => {
-        const notMap = route !== "Map";
+        // const notMap = route !== "Map";
 
         let frame = window.newNode("iframe", {
             id: `${route}Window`,
@@ -52,9 +53,10 @@ const iconList = {
             src: `https://cybercodeonline.com/tabs/${route}`,
             style: {
                 "width": `${widthList[i]}%`,
-                "position": notMap ? "absolute" : "",
-                "z-index": notMap ? 500 : 0,
-                "left": `${i * (100 - widthList[i]) / 2}%`
+                "margin": `0px ${i == 1 ? "8%" : ""}`
+                //"position": notMap ? "absolute" : "",
+                //"z-index": notMap ? 500 : 0,
+                //"left": `${i * (100 - widthList[i]) / 2}%`
             }
         });
 
@@ -65,20 +67,20 @@ const iconList = {
             frame.src = frame.src;
         });
 
-        if (notMap) {
-            const setSwitchStatus = (OnOffSwitch, status) => {
-                OnOffSwitch.style.backgroundColor = (+status) ? "#bdffc8" : "#fc5688";
-                frame.style.display = (+status) ? "" : "none";
-                ls.switchStatus[OnOffSwitch.id] = status;
-            };
+        // if (notMap) {
+        //     const setSwitchStatus = (OnOffSwitch, status) => {
+        //         OnOffSwitch.style.backgroundColor = (+status) ? "#bdffc8" : "#fc5688";
+        //         frame.style.display = (+status) ? "" : "none";
+        //         ls.switchStatus[OnOffSwitch.id] = status;
+        //     };
 
-            const OnOffSwitch = addDragButton("switch", route, (OnOffSwitch) => {
-                if (OnOffSwitch.drag) return;
-                setSwitchStatus(OnOffSwitch, +!ls.switchStatus[OnOffSwitch.id]);
-            });
+        //     const OnOffSwitch = addDragButton("switch", route, (OnOffSwitch) => {
+        //         if (OnOffSwitch.drag) return;
+        //         setSwitchStatus(OnOffSwitch, +!ls.switchStatus[OnOffSwitch.id]);
+        //     });
 
-            setSwitchStatus(OnOffSwitch, ls.switchStatus[OnOffSwitch.id] ?? 1);
-        }
+        //     setSwitchStatus(OnOffSwitch, ls.switchStatus[OnOffSwitch.id] ?? 1);
+        // }
 
     });
 })();
