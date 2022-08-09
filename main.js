@@ -1,13 +1,27 @@
-const widthList = [29, 100, 28];
+const windowWidth = window.outerWidth;
 
+const definedIdList = [
+    "#refreshInv",
+    "#refreshMap",
+    "#refreshChat",
+    "#switchInv",
+    "#switchChat",
+    "chat"
+];
 
-const defaultPos = {
-    "#refreshInv": [510, 10],
-    "#refreshMap": [1100, 5],
-    "#refreshChat": [1600, 60],
-    "#switchInv": [1180, 5],
-    "#switchChat": [1240, 5]
-};
+const scale = mapArrToObj(
+    [3.765, 1.745, 1.2, 1.628, 1.548, 68.571],
+    definedIdList
+);
+
+const widthList = [29, 100, (56 - (windowWidth / scale.chat))];
+
+const defaultPos = mapArrToObj(
+    [10, 5, 60, 5, 5],
+    definedIdList.slice(0, -1),
+    (key, val) => [windowWidth / scale[key], val]
+);
+
 
 const iconList = {
     "refresh": {
@@ -23,7 +37,6 @@ const iconList = {
 
 (() => {
 
-    window.ls = ls_proxy(localStorage);
 
     ["switchStatus", "tempPos"].forEach((key) => {
         if (!ls[key]) ls[key] = {};
@@ -184,46 +197,4 @@ function addDragButton(type, id, event) {
     }, 1500);
 
     return dragButton;
-}
-
-function ls_proxy(obj, keys = []) {
-    return new Proxy(obj, { get, set });
-
-    function get(obj, p, is_proxy = true) {
-
-        if (!p.toString()) return obj;
-
-        let result = obj;
-        for (let k of p.toString().split(',')) {
-            if (k in result) result = result[k];
-            else break;
-        }
-        if (result === obj) return undefined;
-
-        try {
-            result = JSON.parse(result);
-        }
-        catch { }
-
-
-        if (!Array.isArray(result) && typeof (result) === 'object' && is_proxy) {
-            result = ls_proxy(result, keys.concat(p));
-        }
-
-        return result;
-    }
-
-    function set(obj, p, val) {
-
-        if (keys.length !== 0) {
-            let original_key = keys.shift();
-            let pre_obj = get(localStorage, original_key, false);
-            get(pre_obj, keys, false)[p] = val;
-
-            localStorage[original_key] = JSON.stringify(pre_obj);
-        }
-
-        obj[p] = JSON.stringify(val);
-    }
-
 }
