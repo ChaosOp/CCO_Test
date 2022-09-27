@@ -15,7 +15,21 @@ const scale = mapArrToObj(
 );
 
 //const widthList = [29, 100, (56 - (windowWidth / scale.chat))];
-const widthList = [27, 30, 27];
+
+const windowList = ["Inv", "Map", "Chat"];
+
+const widthList = [
+    [27, 30, 27],
+    [40, 45],
+    [90]
+];
+
+const marginList = [
+    ["0px", "0px 8%", "0px"],
+    ["0px", "0px 6%"],
+    ["0px 3%"]
+];
+
 
 const defaultPos = mapArrToObj(
     [10, 5, 60, 5, 5],
@@ -44,7 +58,7 @@ const iconList = {
     });
 
 
-    ["Inv", "Map", "Chat"].forEach((route, i) => {
+    windowList.forEach((route, i) => {
         // const notMap = route !== "Map";
 
         let frame = window.newNode("iframe", {
@@ -52,8 +66,8 @@ const iconList = {
             frameBorder: "0",
             src: `https://cybercodeonline.com/tabs/${route}`,
             style: {
-                "width": `${widthList[i]}%`,
-                "margin": `0px ${i == 1 ? "8%" : ""}`
+                width: `${widthList[0][i]}%`,
+                margin: marginList[0][i]
                 //"position": notMap ? "absolute" : "",
                 //"z-index": notMap ? 500 : 0,
                 //"left": `${i * (100 - widthList[i]) / 2}%`
@@ -83,6 +97,26 @@ const iconList = {
         // }
 
     });
+
+    const ID = setInterval(() => {
+
+        const windowCount = Math.min(Math.ceil(window.innerWidth / 450), 3);
+        const index = 3 - windowCount;
+
+        windowList.forEach((route, i) => {
+            const iframe = window.get(`#${route}Window`)[0];
+            const isVisible = i <= (windowCount - 1);
+
+            iframe.style.display = isVisible ? "" : "none";
+            if (isVisible) {
+                iframe.style.width = `${widthList[index][i]}%`;
+                iframe.style.margin = marginList[index][i];
+            }
+
+            window.get(`#refresh${route}`)[0].style.display = iframe.style.display;
+        });
+
+    }, 100);
 })();
 
 /**
